@@ -32,10 +32,10 @@ const Footer = () => {
 
       <div>
         <h3 className="text-xl font-medium mb-5">Contacts</h3>
-        <p>
+        <div className="flex items-center gap-3 mb-2">
           <FontAwesomeIcon icon={faLocation}></FontAwesomeIcon>{" "}
           <address>Rasulbag, Dhaka-1200</address>
-        </p>
+        </div>
         <p>
           <FontAwesomeIcon icon={faMobile}/>
           <span>+880 1756415098</span>
