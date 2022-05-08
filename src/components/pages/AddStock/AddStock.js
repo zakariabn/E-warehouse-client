@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
 import "./AddStock.css";
 
@@ -49,7 +50,20 @@ const AddStock = () => {
       try {
         await axios
           .post("http://localhost:5000/stock", { stockInfo })
-          .then((response) => console.log(response));
+          .then((response) => {
+            console.log(response);
+            toast.success('New stock added successfully');
+            
+            e.target.name.value = '';
+            e.target.type.value = '';
+            e.target.image.value = '';
+            e.target.price.value = '';
+            e.target.currency.value = '';
+            e.target.quantity.value = '';
+            e.target.supplier.value = '';
+            e.target.number.value = '';
+            e.target.description.value = '';
+          });
       } catch (error) {
         console.log(error);
       }

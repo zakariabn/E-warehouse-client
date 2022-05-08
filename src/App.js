@@ -7,6 +7,8 @@ import Header from "./components/Header/Header";
 import AddStock from "./components/pages/AddStock/AddStock";
 import Home from "./components/pages/Home/Home";
 import Inventory from "./components/pages/Inventory/Inventory";
+import MyStock from "./components/pages/MyStock/MyStock";
+import EmailVerification from "./components/Shared/EmailVerification/EmailVerification";
 import Footer from "./components/Shared/Footer/Footer";
 import StockDetails from "./components/StockDetails/StockDetails";
 
@@ -23,7 +25,6 @@ function App() {
               <Inventory></Inventory>
             </RequireAuth>
           }></Route>
-
         <Route
           path="/stock-details/:id"
           element={
@@ -31,7 +32,6 @@ function App() {
               <StockDetails></StockDetails>
             </RequireAuth>
           }></Route>
-
         <Route
           path="/add-stock"
           element={
@@ -39,7 +39,16 @@ function App() {
               <AddStock></AddStock>
             </RequireAuth>
           }></Route>
-
+        <Route
+          path="/my-stock"
+          element={
+            <RequireAuth>
+              <MyStock></MyStock>
+            </RequireAuth>
+          }></Route>
+        <Route
+          path="/email-verification"
+          element={<EmailVerification></EmailVerification>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/sign-up" element={<Register></Register>}></Route>
       </Routes>

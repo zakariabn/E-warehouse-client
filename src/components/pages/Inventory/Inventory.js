@@ -2,30 +2,44 @@ import React from "react";
 import useGetStock from "../../../hooks/useGetStock";
 import SingleStock from "./SingleStock";
 import "./inventory.css";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { data } from "autoprefixer";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const Inventory = () => {
+  const [user] = useAuthState(auth);
   const [stock, setStock] = useGetStock();
   const navigate = useNavigate();
-  
-  function handelStockDelete (id) {
-    const isReady = window.confirm(" Are you sure you want to delete");    
+  let location = useLocation();
+
+
+  function handelStockDelete(id) {
+    const isReady = window.confirm(" Are you sure you want to delete");
 
     if (isReady) {
       const url = `http://localhost:5000/stock/${id}`;
-      axios.delete(url)
-        .then (response => {
-          if (response.data.deletedCount === 1) {
-            const remaining = stock.filter( stock => stock._id !== id);
-            setStock(remaining);
-          }
-        });
-    } 
+      axios.delete(url).then((response) => {
+        if (response.data.deletedCount === 1) {
+          const remaining = stock.filter((stock) => stock._id !== id);
+          setStock(remaining);
+        }
+      });
+    }
   }
-  
+  console.log(user);
 
+  function handelSendToAddStockPage() {
+    const provider = user?.providerData[0]?.providerId;
+    const isEmailVerified = user?.emailVerified;
+
+    if (provider === "password" && !isEmailVerified) {
+      <Navigate to="/email-verification" state={{ from: location }} replace />;
+    } else {
+      navigate("/add-stock");
+    }
+  }
 
   let counter = 1;
   return (
@@ -64,14 +78,15 @@ const Inventory = () => {
                 key={stock._id}
                 stock={stock}
                 DemoId={counter++}
-                handelStockDelete={handelStockDelete}
-                ></SingleStock>
+                handelStockDelete={handelStockDelete}></SingleStock>
             );
           })}
         </table>
       </div>
 
-      <button className="bg-dark_gray text-white font-semibold px-4 py-2 rounded-sm hover:bg-primary duration-100 hover:shadow-[1px_2px_2px_gray] active:translate-y-[2px] active:shadow-none" onClick={() => navigate('/add-stock')}>
+      <button
+        className="bg-dark_gray text-white font-semibold px-4 py-2 rounded-sm hover:bg-primary duration-100 hover:shadow-[1px_2px_2px_gray] active:translate-y-[2px] active:shadow-none"
+        onClick={handelSendToAddStockPage}>
         Add New Stock
       </button>
     </div>
