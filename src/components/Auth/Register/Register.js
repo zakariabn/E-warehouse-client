@@ -1,4 +1,5 @@
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
@@ -9,15 +10,39 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const [userInfoError, setUserInfoError] = useState({
     nameError: "",
     emailError: "",
     passwordError: "",
+    confirmPasswordError: "",
   });
 
-  console.log(userInfo, userInfoError);
+  const [passVisible, setPassVisible] = useState(false);
+  function passwordVisible(boolean) {
+    if (boolean) {
+      return (
+        <>
+          <FontAwesomeIcon
+          icon={faEye}
+          className="absolute top-2.5 right-3 text-purple-600"
+          onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
+        </>
+      )
+    }
+    else {
+      return (
+        <>
+          <FontAwesomeIcon
+          icon={faEyeSlash}
+          className="absolute top-2.5 right-3 text-purple-600"
+          onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
+        </>
+      )
+    }
+  }
 
   function handelEmailChange(e) {
     const emailValidityChecker = /(.+)@(.+){2,}\.(.+){2,}/;
@@ -35,8 +60,7 @@ const Register = () => {
   }
 
   function handelPasswordChange(e) {
-    const passwordValidityChecker =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    const passwordValidityChecker = /^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{6,}$/;
 
     const passwordInputValue = e.target.value;
     const validPassword = passwordValidityChecker.test(passwordInputValue);
@@ -46,12 +70,37 @@ const Register = () => {
       setUserInfoError({ ...userInfoError, passwordError: "" });
     } else {
       setUserInfo({ ...userInfo, password: "" });
-      setUserInfoError({ ...userInfoError, passwordError: "Invalid password" });
+      setUserInfoError({
+        ...userInfoError,
+        passwordError: "password must contain number character and 6 length",
+      });
     }
+
+    if(!passwordInputValue) {
+      setUserInfoError({ ...userInfoError, passwordError: "" });
+    }
+  
+
   }
 
-  function handelConfirmPasswordChanged () {
-    
+  function handelConfirmPasswordChanged(e) {
+    const confirmPassword = e.target.value;
+    const isMatched = userInfo.password === confirmPassword;
+
+    if (isMatched) {
+      setUserInfo({ ...userInfo, confirmPassword: confirmPassword });
+      setUserInfoError({ ...userInfoError, confirmPasswordError: "" });
+    } else {
+      setUserInfo({ ...userInfo, confirmPassword: "" });
+      setUserInfoError({
+        ...userInfoError,
+        confirmPasswordError: "Password did't match",
+      });
+    }
+
+    if(!confirmPassword) {
+      setUserInfoError({ ...userInfoError, confirmPasswordError: "" });
+    }
   }
 
   return (
@@ -87,29 +136,35 @@ const Register = () => {
             </small>
           </div>
 
-          <div className="flex flex-col mb-2">
+          {/* Password input */}
+          <div className="flex flex-col mb-2 relative">
             <input
-              type="password"
-              name=""
+              type={`${passVisible ? "text" : "password"}`}
+              name="password"
               placeholder="Password"
               onChange={handelPasswordChange}
               className="border border-[#ababac50] px-2 rounded-md shadow-sm h-[35px] focus:outline-none"
             />
+            <span>{passwordVisible(passVisible)}</span>
             <small className="ml-3 text-orange">
               {userInfoError.passwordError && userInfoError.passwordError}
             </small>
           </div>
 
-          <div className="flex flex-col mb-2">
+          <div className="flex flex-col mb-2 relative">
             <input
-              type="confirm_password"
-              name=""
+              type={`${passVisible ? "text" : "password"}`}
+              name="confirm_password"
               id=""
               placeholder="Confirm Password"
               onChange={handelConfirmPasswordChanged}
               className="border border-[#ababac50] px-2 rounded-md shadow-sm h-[35px] focus:outline-none"
             />
-            <small className="ml-3 text-orange">error</small>
+            <span>{passwordVisible(passVisible)}</span>
+            <small className="ml-3 text-orange">
+              {userInfoError.confirmPasswordError &&
+                userInfoError.confirmPasswordError}
+            </small>
           </div>
 
           {/* submit btn */}
@@ -125,15 +180,11 @@ const Register = () => {
               <input type="checkbox" name="remember-check" />
               <label
                 htmlFor="remember-check"
-                className="font-medium text-purple-light">
+                className="font-medium ">
                 {" "}
-                Remember me
+                Agree to our <a href="#" className="text-purple-500">Trams And Condition</a>
               </label>
             </div>
-
-            <button className="text-purple-light font-medium">
-              Forget password
-            </button>
           </div>
         </form>
 
@@ -153,13 +204,13 @@ const Register = () => {
 
         {/* new user redirect to register page button */}
         <span className="flex gap-2 flex-col items-center px-2">
-          <p className="font-medium">Don't have account?</p>
+          <p className="font-medium">Already have an account?</p>
           <span className="font-medium">
             {" "}
             <Link
-              to="/sign-up"
+              to="/login"
               className="bg-purple-light text-white hover:bg-purple-dark duration-150 px-4 py-1 rounded">
-              Register
+              Login
             </Link>
           </span>
         </span>
