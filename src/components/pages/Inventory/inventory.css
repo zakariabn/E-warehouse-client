@@ -1,0 +1,74 @@
+.inventory-table table tr {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 641px) {
+  .inventory-table table tr {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .inventory-table table tr {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .inventory-table table tr {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+.inventory-table table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.inventory-table table td,
+th {
+  /* border: 1px solid rgb(192, 189, 189); */
+  text-align: left;
+  padding: 8px;
+}
+
+.inventory-table table tr:nth-child(even) {
+  color: white;
+  background-color: #16a583;
+}
+
+.inventory-table table tr:nth-child(even) button {
+  color: black;
+  background-color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem 0 0 1rem;
+}
+.inventory-table table tr:nth-child(even) button:nth-child(even) {
+  background-color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0rem 1rem 1rem 0rem;
+}
+
+.inventory-table table tr:nth-child(odd) button {
+  background-color: #f0483e;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem 0 0 1rem;
+}
+.inventory-table table tr:nth-child(odd) button:nth-child(even) {
+  background-color: #f0483e;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0 1rem 1rem 0;
+}

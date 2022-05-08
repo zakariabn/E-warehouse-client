@@ -1,0 +1,64 @@
+.product-detail-form {
+  display: flex;
+}
+.product-detail-form > div {
+  width: 400px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.product-detail-form > div > div {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.product-detail-form > div > div label {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.product-detail-form > div > div label::after {
+  content: " :";
+}
+
+/* input field */
+.product-detail-form > div > div input {
+  width: 230px;
+  height: 30px;
+  padding: 0 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.price-input {
+  width: 170px !important;
+  margin-right: 0.5rem;
+}
+.currency-input {
+  width: 50px !important;
+}
+.product-detail-form > div > div input:focus {
+  outline: none;
+  outline: 1px solid #16a583;
+}
+
+/* selct fild */
+.product-detail-form > div > div select {
+  width: 230px;
+  height: 30px;
+  border-radius: 0.2rem;
+  padding: 0 0.5rem;
+}
+.product-detail-form > div > div select:focus {
+  outline: none;
+  outline: 1px solid #16a583;
+}
+
+/* text area field */
+.product-detail-form > div > div textarea {
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(182, 182, 182, 0.4);
+}
+.product-detail-form > div > div textarea:focus {
+  outline: none;
+  outline: 1px solid #16a583;
+}

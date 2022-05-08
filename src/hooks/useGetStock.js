@@ -9,7 +9,7 @@ function useGetStock (limit = '') {
       .then (data => setStock(data))
       .catch (error => console.dir(error));
   }, [limit])
-  return[stock];  
+  return[stock, setStock];  
 }
 
 export default useGetStock;

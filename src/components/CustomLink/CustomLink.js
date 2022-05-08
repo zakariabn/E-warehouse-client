@@ -12,7 +12,7 @@ function CustomLink({ children, to, ...props }) {
         py-2 px-2 font-main-font text-white
         ${
           match 
-          ? ''  
+          ? 'text-orange'  
           : ''
         }
         `}

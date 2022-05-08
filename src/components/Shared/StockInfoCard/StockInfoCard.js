@@ -14,7 +14,6 @@ const StockInfoCard = (props) => {
   const navigate = useNavigate();
 
   function handelUpdateStockClick(id) {
-    console.log(id);
     navigate(`/stock-details/${id}`)
 
   }
@@ -55,7 +54,7 @@ const StockInfoCard = (props) => {
           <p className="ml-3">{description}</p>
         </div>
 
-      </div>
+      </div >
         <button 
         className="w-full bg-primary absolute bottom-0 rounded-b-xl py-2 text-white text-lg font-semibold hover:bg-dark_orange"
         onClick={() => handelUpdateStockClick(_id)}
