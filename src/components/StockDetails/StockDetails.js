@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import DetailsCard from "./DetailsCard";
 export const StockQuantityContext = createContext("quantity");
 
@@ -52,7 +52,7 @@ const StockDetails = () => {
     if (intChecker.test(newAddedStock)) {
       const updatedStock = currentStock + newAddedStock;
       setStockQuantity(updatedStock);
-      toast("Stock updated");
+      toast.success("Stock updated");
       e.target.add_stock.value = "";
       
     } else {
@@ -62,12 +62,11 @@ const StockDetails = () => {
 
   function handelDelivered() {
     setStockQuantity(stockQuantity - 1);
-    toast("Successfully Delivered");
+    toast.success("Successfully Delivered");
   }
 
   return (
     <div className="flex flex-col items-center justify-center my-10">
-      <ToastContainer/>
       <DetailsCard
         stockDetails={stock}
         stockQuantity={stockQuantity}

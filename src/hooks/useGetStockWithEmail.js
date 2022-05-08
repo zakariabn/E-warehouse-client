@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-function useGetStock (limit = '', email = '') {
+function useGetStockWithEmail (email) {
   const [stock, setStock] = useState([]);
 
   useEffect(() => {
-    fetch (`http://localhost:5000/stock?limit=${limit}`)
+    fetch (`http://localhost:5000/stock?email=${email}`)
       .then (res => res.json())
       .then (data => setStock(data))
       .catch (error => console.dir(error));
-  }, [limit])
+  }, [email])
   return[stock, setStock];  
 }
 
-export default useGetStock;
+export default useGetStockWithEmail;

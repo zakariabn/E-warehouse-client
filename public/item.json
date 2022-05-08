@@ -1,6 +1,9 @@
 [
   {
     "name": "Walton FHD Smart LED Television WD4-TS43-KS220, 43 Inch",
+    "email" : "zakaria7262@gmail.com",
+    "sold" : "0",
+    "type" : "television",
     "img": "https://i.ibb.co/jy9cD27/tv-01.jpg",
     "description": "Product Type: Smart LED TV Brightness(Typical): 250 nits Power Supply: AC 110V-240V 50/60Hz Maximum Power Consumption: 75WStandby Power Consumption: < 0.5 W",
     "price": [87000, "tk"],
@@ -10,6 +13,9 @@
   },
   {
     "name": "WFE-3A2-GDXX-XX",
+    "email" : "zakaria7262@gmail.com",
+    "sold" : "0",
+    "type" : "fridge",
     "img": "https://i.ibb.co/8gKJxnt/3-A2-GDXX-XX.jpg",
     "description": "Direct Cool Gross Volume: 312 Ltr Net Volume: 290 Ltr Refrigerant: R600a No need to use Voltage Stabilizer",
     "price": [38990, "tk"],

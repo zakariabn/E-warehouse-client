@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import auth from "../../../firebase.init";
 import "./AddStock.css";
 
 const AddStock = () => {
+  const [user] = useAuthState(auth);
   // const [stockInfo, setStockInfo] = useState({
   //   name: "",
   //   type: "",
@@ -32,6 +35,7 @@ const AddStock = () => {
     // setting
     const stockInfo = {
       name: name,
+      email: user?.email,
       type: type,
       img: img,
       supplier_name: supplier_name,

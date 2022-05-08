@@ -5,6 +5,9 @@ import { UserIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+
 const Register = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -18,6 +21,7 @@ const Register = () => {
     emailError: "",
     passwordError: "",
     confirmPasswordError: "",
+    generalError: "",
   });
 
   const [passVisible, setPassVisible] = useState(false);
@@ -26,21 +30,20 @@ const Register = () => {
       return (
         <>
           <FontAwesomeIcon
-          icon={faEye}
-          className="absolute top-2.5 right-3 text-purple-600"
-          onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
+            icon={faEye}
+            className="absolute top-2.5 right-3 text-purple-600"
+            onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
         </>
-      )
-    }
-    else {
+      );
+    } else {
       return (
         <>
           <FontAwesomeIcon
-          icon={faEyeSlash}
-          className="absolute top-2.5 right-3 text-purple-600"
-          onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
+            icon={faEyeSlash}
+            className="absolute top-2.5 right-3 text-purple-600"
+            onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
         </>
-      )
+      );
     }
   }
 
@@ -76,11 +79,9 @@ const Register = () => {
       });
     }
 
-    if(!passwordInputValue) {
+    if (!passwordInputValue) {
       setUserInfoError({ ...userInfoError, passwordError: "" });
     }
-  
-
   }
 
   function handelConfirmPasswordChanged(e) {
@@ -97,11 +98,37 @@ const Register = () => {
         confirmPasswordError: "Password did't match",
       });
     }
-
-    if(!confirmPassword) {
+    if (!confirmPassword) {
       setUserInfoError({ ...userInfoError, confirmPasswordError: "" });
     }
   }
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+  useCreateUserWithEmailAndPassword(auth);
+
+  function handelCreateNewUser (e) {
+    e.preventDefault();
+    const email = userInfo.email;
+    const password = userInfo.password;
+
+    if (email || password) {
+      createUserWithEmailAndPassword(email, password);
+      setUserInfoError({ ...userInfoError, generalError: "" });
+    } else {
+      setUserInfoError({
+        ...userInfoError,
+        generalError: "Email and password must require",
+      });
+    }
+  }
+
+  if (error) {
+    console.log(error);
+  }
+  if (user) {
+    console.log(user);
+  }
+
 
   return (
     <div className="flex justify-center my-20">
@@ -111,7 +138,7 @@ const Register = () => {
         </div>
         <h2 className="text-xl font-main-font">Sign up</h2>
 
-        <form className="mt-5 w-full px-10">
+        <form className="mt-5 w-full px-10" onSubmit={handelCreateNewUser}>
           <div className="flex flex-col mb-2">
             <input
               type="text"
@@ -167,6 +194,11 @@ const Register = () => {
             </small>
           </div>
 
+          {/* general error */}
+          <span className="text-orange font-medium text-center block">
+            {userInfoError.generalError && userInfoError.generalError}
+          </span>
+
           {/* submit btn */}
           <input
             type="submit"
@@ -178,11 +210,12 @@ const Register = () => {
           <div className="w-full flex justify-between mt-2">
             <div className="flex items-center gap-2">
               <input type="checkbox" name="remember-check" />
-              <label
-                htmlFor="remember-check"
-                className="font-medium ">
+              <label htmlFor="remember-check" className="font-medium ">
                 {" "}
-                Agree to our <a href="#" className="text-purple-500">Trams And Condition</a>
+                Agree to our{" "}
+                <a href="#" className="text-purple-500">
+                  Trams And Condition
+                </a>
               </label>
             </div>
           </div>

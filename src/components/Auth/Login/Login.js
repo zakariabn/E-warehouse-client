@@ -2,24 +2,29 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserIcon } from "@heroicons/react/outline";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
 
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [userInfo, setUserInfo] = useState({
-    
     email: "",
     password: "",
     
   });
 
   const [userInfoError, setUserInfoError] = useState({
-    
     emailError: "",
     passwordError: "",
-    
+    generalError: ""
   });
 
+  
   const [passVisible, setPassVisible] = useState(false);
   function passwordVisible(boolean) {
     if (boolean) {
@@ -79,9 +84,77 @@ const Login = () => {
     if(!passwordInputValue) {
       setUserInfoError({ ...userInfoError, passwordError: "" });
     }
-  
-
   }
+
+
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+
+  // handling login  
+  function handelLogin (e) {
+    e.preventDefault();
+    const email = userInfo.email;
+    const password = userInfo.password;
+
+    if (email || password) {
+      signInWithEmailAndPassword(email, password);
+      setUserInfoError({ ...userInfoError, generalError: "" });
+    } else {
+      setUserInfoError({
+        ...userInfoError,
+        generalError: "Email and password must require",
+      });
+    }
+  }
+
+  let from = location.state?.from?.pathname || "/";
+  if (user) {
+    navigate(from, {replace: true});
+  }
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+      switch (error?.code) {
+        case "auth/user-not-found":
+          toast.error('User not found please register');
+          break;
+        case "auth/wrong-password":
+          toast.error('Wrong Password try again.');
+          break;
+        case "auth/too-many-requests":
+          toast.error('Account is temporary banned for to many wrong attempt');
+          break;
+        default:
+          break;
+      }
+    }
+  }, [error])
+
+  // password reset functionality
+  const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
+    auth
+  );
+
+  function handelResetPassword () {
+    const email = userInfo.email;
+
+    if (email) {
+      sendPasswordResetEmail(email)
+    }
+    else {
+      toast.error('Email not found. Please input email.')
+    }
+  }
+  if (sending) {
+    toast.success('Password reset link send.', {id: 12231})
+  }
+
+
 
   return (
     <div className="flex justify-center my-20">
@@ -91,7 +164,7 @@ const Login = () => {
         </div>
         <h2 className="text-xl font-main-font">Login</h2>
 
-        <form className="mt-5 w-full px-10">
+        <form className="mt-5 w-full px-10" onSubmit={handelLogin}>
 
           {/* email input */}
           <div className="flex flex-col mb-2">
@@ -141,7 +214,7 @@ const Login = () => {
               </label>
             </div>
 
-            <button className="text-purple-light font-medium">
+            <button className="text-purple-light font-medium" onClick={handelResetPassword}>
               Forget password
             </button>
           </div>
