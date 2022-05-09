@@ -5,11 +5,14 @@ import Register from "./components/Auth/Register/Register";
 import RequireAuth from "./components/Auth/RequireAuth/RequireAuth";
 import Header from "./components/Header/Header";
 import AddStock from "./components/pages/AddStock/AddStock";
+import Blogs from "./components/pages/Blogs/Blogs";
+import ReadBlog from "./components/pages/Blogs/ReadBlog";
 import Home from "./components/pages/Home/Home";
 import Inventory from "./components/pages/Inventory/Inventory";
 import MyStock from "./components/pages/MyStock/MyStock";
 import EmailVerification from "./components/Shared/EmailVerification/EmailVerification";
 import Footer from "./components/Shared/Footer/Footer";
+import PageNotFound from "./components/Shared/PageNotFound/PageNotFound";
 import StockDetails from "./components/StockDetails/StockDetails";
 
 function App() {
@@ -49,9 +52,14 @@ function App() {
         <Route
           path="/email-verification"
           element={<EmailVerification></EmailVerification>}></Route>
+        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
+        <Route path="/read-blog/:id" element={<ReadBlog></ReadBlog>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/sign-up" element={<Register></Register>}></Route>
+
+        <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
       </Routes>
+
       <Footer></Footer>
     </div>
   );

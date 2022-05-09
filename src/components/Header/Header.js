@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomLink from "../CustomLink/CustomLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+import { faFeather, faHome, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
@@ -51,6 +51,13 @@ const Header = () => {
             <span className="flex flex-col">
               <FontAwesomeIcon icon={faWarehouse} />
               <span>Inventory</span>
+            </span>
+          </CustomLink>
+
+          <CustomLink to="/blogs">
+            <span className="flex flex-col">
+              <FontAwesomeIcon icon={faFeather} />
+              <span>Blogs</span>
             </span>
           </CustomLink>
 

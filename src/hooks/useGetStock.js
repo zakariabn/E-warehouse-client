@@ -4,7 +4,7 @@ function useGetStock (limit = '', email = '') {
   const [stock, setStock] = useState([]);
 
   useEffect(() => {
-    fetch (`http://localhost:5000/stock?limit=${limit}`)
+    fetch (`https://e-warehouse.herokuapp.com/stock?limit=${limit}`)
       .then (res => res.json())
       .then (data => setStock(data))
       .catch (error => console.dir(error));

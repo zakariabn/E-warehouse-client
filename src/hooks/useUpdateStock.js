@@ -7,7 +7,7 @@ function useUpdateStock(id, updateKey) {
   useEffect(() => {
     async function getStock() {
       await axios
-        .get(`http://localhost:5000/stock/${id}`)
+        .get(`https://e-warehouse.herokuapp.com/stock/${id}`)
         .then((response) => setStockInfo(response.data))
         .catch((error) => console.dir(error));
     }
@@ -20,7 +20,7 @@ function useUpdateStock(id, updateKey) {
   useEffect(() => {
     async function updateQuantity() {
       await axios
-        .post(`http://localhost:5000/stock/${id}`, { updateKey })
+        .post(`https://e-warehouse.herokuapp.com/stock/${id}`, { updateKey })
         .then((res) => {
           if (res.data.acknowledged) {
             // setStock(res.data);
