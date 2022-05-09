@@ -13,7 +13,7 @@ const Blogs = () => {
   useEffect(() => {
     async function getBlogs() {
       await axios
-        .get(`https://e-warehouse.herokuapp.com/`)
+        .get(`https://e-warehouse.herokuapp.com/blog`)
         .then((res) => setBlogs(res.data));
     }
     getBlogs();
@@ -24,8 +24,8 @@ const Blogs = () => {
       <h1 className="text-4xl font-bold text-center">Blogs page</h1>
       <div className="flex justify-center gap-5 my-10">
         {blogs?.map((blog) => {
-          const { img, title, blogText } = blog;
-          return <Blog img={img} title={title} bodyText={blogText}></Blog>;
+          const {_id, img, title, blogText } = blog;
+          return <Blog img={img} title={title} bodyText={blogText} id={_id}></Blog>;
         })}
       </div>
     </div>

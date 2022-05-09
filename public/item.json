@@ -1,62 +1,8 @@
 [
   {
-    "name": "Walton FHD Smart LED Television WD4-TS43-KS220, 43 Inch",
-    "email" : "zakaria7262@gmail.com",
-    "sold" : "0",
-    "type" : "television",
-    "img": "https://i.ibb.co/jy9cD27/tv-01.jpg",
-    "description": "Product Type: Smart LED TV Brightness(Typical): 250 nits Power Supply: AC 110V-240V 50/60Hz Maximum Power Consumption: 75WStandby Power Consumption: < 0.5 W",
-    "price": [87000, "tk"],
-    "quantity": 20,
-    "supplier_name": "Walton",
-    "phone": "+1 (934) 568-2379"
-  },
-  {
-    "name": "WFE-3A2-GDXX-XX",
-    "email" : "zakaria7262@gmail.com",
-    "sold" : "0",
-    "type" : "fridge",
-    "img": "https://i.ibb.co/8gKJxnt/3-A2-GDXX-XX.jpg",
-    "description": "Direct Cool Gross Volume: 312 Ltr Net Volume: 290 Ltr Refrigerant: R600a No need to use Voltage Stabilizer",
-    "price": [38990, "tk"],
-    "quantity": 10,
-    "supplier_name": "Walton",
-    "phone": "+1 (801) 474-2069"
-  },
-  {
-    "name": "Magdalena Fisher",
-    "img": "http://placehold.it/32x32",
-    "description": "Anim consectetur proident aute dolore fugiat ad anim esse ullamco pariatur exercitation. Deserunt reprehenderit ut consequat et cillum culpa non ad ut ex. Magna sint velit pariatur ipsum ullamco. Anim veniam culpa reprehenderit ipsum eiusmod dolor. Dolore Lorem cupidatat id voluptate ut. Culpa et est eu enim. Et est elit occaecat enim id deserunt commodo pariatur.\r\n",
-    "price": [114.96],
-    "quantity": 17,
-    "supplier_name": "Santos Phillips",
-    "phone": "+1 (864) 494-3803"
-  },
-  {
-    "name": "Callie Pennington",
-    "img": "http://placehold.it/32x32",
-    "description": "Dolor commodo adipisicing est dolor labore. Veniam do veniam aliqua culpa fugiat duis adipisicing consequat excepteur. Id cupidatat est adipisicing incididunt sint ea sit incididunt ut nostrud anim voluptate tempor. Excepteur dolor in cupidatat irure duis anim cillum exercitation tempor est labore consequat. Irure tempor est reprehenderit nostrud occaecat ullamco enim anim consectetur adipisicing veniam.\r\n",
-    "price": [190.08],
-    "quantity": 29,
-    "supplier_name": "Dorthy Whitfield",
-    "phone": "+1 (970) 455-2719"
-  },
-  {
-    "name": "Nona Russell",
-    "img": "http://placehold.it/32x32",
-    "description": "Nulla aliquip incididunt aliqua tempor sint elit anim occaecat. Dolore nulla voluptate adipisicing in elit aute et aliquip quis ullamco ullamco Lorem. Irure ut minim quis exercitation nulla cillum esse consectetur veniam incididunt. Et excepteur mollit labore ut amet eiusmod pariatur dolor proident.\r\n",
-    "price": [177.51],
-    "quantity": 14,
-    "supplier_name": "Owens Pena",
-    "phone": "+1 (801) 494-2371"
-  },
-  {
-    "name": "Sutton Mclaughlin",
-    "img": "http://placehold.it/32x32",
-    "description": "Do ipsum qui adipisicing aliqua cupidatat pariatur et sint non amet reprehenderit. Aute amet ea reprehenderit anim eu sint pariatur aliqua Lorem proident. Dolore velit incididunt laboris ad exercitation dolore velit proident veniam voluptate deserunt.\r\n",
-    "price": [199.78],
-    "quantity": 15,
-    "supplier_name": "Alexandra Dawson",
-    "phone": "+1 (949) 502-2886"
+    "title": "Deferent between node.js vs javascript",
+    "img": "https://www.pngkit.com/png/detail/470-4704009_nodejs-rust-logo-node-js.png",
+
+    "blogText": "node.js হলো একটা ক্রস-প্ল্যাটফর্ম ওপেনসোর্স জাভাস্ক্রিপ্ট রানটাইম ইনভারমেন্ট । যেটা জাভাস্ক্রিপ্ট কে সার্ভার সাইডে রান করাতে সাহায্য করে । node.jsসাধারণত server-side ইউজ হয় । node.js v8 ইঞ্জিন এর সাহায্যে রান করানো হয় । <br/> <br/> আর জাভাস্ক্রিপ্ট হলো একটা স্ক্রিপ্টিং ল্যাঙ্গুয়েজ । যেটা ওয়েবসাইটের  fronend ডেভেলপমেন্টে স্ক্রিপ্ট লিখতে ব্যবহার করা হয় ।   যেটা যেকোন ব্রাউজারে চলতে পারে ।"
   }
 ]

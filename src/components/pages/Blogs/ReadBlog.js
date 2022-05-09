@@ -9,7 +9,7 @@ const ReadBlog = () => {
   useEffect(() => {
     async function getBlog() {
       await axios
-        .get(`https://e-warehouse.herokuapp.com/${id}`)
+        .get(`https://e-warehouse.herokuapp.com/blog/${id}`)
         .then((res) => setBlog(res.data));
     }
     getBlog();
@@ -19,12 +19,9 @@ const ReadBlog = () => {
 
   return (
     <div>
-      <h1>This is title</h1>
+      <h1>{title}</h1>
       <p>
-        this is body tex Lorem ipsum dolor sit amet, consectetur adipisicing
-        elit. Deserunt, eos suscipit quia veritatis iure eveniet ipsum optio eum
-        officia alias corrupti? Eaque sed velit aliquam magnam exercitationem
-        eius repellendus molestias!
+        {textBody}
       </p>
     </div>
   );

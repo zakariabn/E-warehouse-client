@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Blog = (props) => {
-  const { title, bodyText, img } = props;
+  const { id, title, bodyText, img } = props;
   const navigate = useNavigate();
 
 
@@ -30,7 +30,7 @@ const Blog = (props) => {
         </p>
         <button
           className={`text-orange bg-white px-3 font-bold rounded-full mt-5`}
-          onClick={() => navigate('/read-blog/1')}
+          onClick={() => navigate(`/read-blog/${id}`)}
           >
           See More
         </button>
