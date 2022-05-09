@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const DetailsCard = ({stockDetails, handelUpdateStock, stockQuantity}) => {
-  const { _id, name, img, description, price, quantity, supplier_name } = stockDetails;
+const DetailsCard = ({stockDetails, handelUpdateStock, stockQuantity, totalSold}) => {
+  const { _id, name, img,  price, supplier_name } = stockDetails;
   
   const [formState, setFormState] = useState(false);
   
@@ -15,27 +15,27 @@ const DetailsCard = ({stockDetails, handelUpdateStock, stockQuantity}) => {
 
   return (
     <>
-      <div className="bg-slate-200 w-[700px]">
+      <div className="bg-slate-200 lg:w-[700px]">
         <h4 className="bg-primary">
           Product ID: <span>{_id}</span>
         </h4>
-        <div className="flex gap-10">
+        <div className="flex flex-col lg:flex-row lg:gap-10">
           <div className=" flex flex-col items-center p-3 w-[350px]">
             <h3 className="max-w-[300px]">{name}</h3>
             <img src={img} alt="" className="h-[300px]" />
           </div>
 
-          <div className="w-[350px] mt-20">
+          <div className="w-[350px] flex flex-col items-center lg:block mt-20">
             <div className="mb-10">
               <p>Price: {price}</p>
               <p>Supplier: {supplier_name}</p>
             </div>
 
             <div>
-              <p>Sold: {"sold"}</p>
+              <p>Sold: {totalSold}</p>
               <p>Current Stock: {stockQuantity}</p>
               <button
-                className="mt-4 bg-primary px-3 py-2 rounded-md font-medium text-white"
+                className="mt-4 bg-primary px-3 py-2 rounded-md font-medium text-white mb-6"
                 onClick={popupFormToggle}>
                 Update stock
               </button>
@@ -47,7 +47,7 @@ const DetailsCard = ({stockDetails, handelUpdateStock, stockQuantity}) => {
       <div
         className={`${
           formState ? "absolute" : "hidden"
-        } top-0 left-0 translate-x-[45vw] translate-y-[30vh] bg-white p-3`}>
+        } top-0 left-0  translate-x-[45vw] translate-y-[40vh] lg:translate-y-[30vh] bg-white p-3`}>
         <button
           className="absolute top-0 right-1 text-primary hover:text-orange"
           onClick={popupFormToggle}>

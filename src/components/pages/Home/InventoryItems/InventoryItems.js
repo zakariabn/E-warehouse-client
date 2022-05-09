@@ -1,13 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useGetStock from "../../../../hooks/useGetStock";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import StockInfoCard from "../../../Shared/StockInfoCard/StockInfoCard";
 
 const InventoryItems = () => {
   const [stock] = useGetStock(6);
+  const navigate = useNavigate();
 
   return (
-    <div className="my-5 overflow-hidden max-w-screen-lg">
+    <div className="my-5 max-w-screen-lg">
       <h2 className="text-center font-bold text-3xl mt-6 mb-10">
         Inventory Items
       </h2>
@@ -23,6 +25,11 @@ const InventoryItems = () => {
         ) : (
           <LoadingSpinner></LoadingSpinner>
         )}
+      </div>
+      <div className="flex justify-center">
+        <button className="bg-orange px-14 p-2  rounded-full text-white font-medium hover:bg-purple-dark hover:text-white hover:cursor-pointer duration-200 mt-10" onClick={() => navigate('/inventory')}>
+          See more
+        </button>
       </div>
     </div>
   );

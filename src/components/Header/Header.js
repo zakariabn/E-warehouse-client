@@ -79,10 +79,10 @@ const Header = () => {
 
         {/* user information popup box */}
         <div
-          className={`absolute top-20 right-5 xl:right-[-140px] bg-slate-100 rounded-md p-2 flex flex-col items-center shadow-md ${
+          className={`absolute min-w-[200px] top-20 right-5 xl:right-[-140px] bg-slate-100 rounded-md p-2 flex flex-col items-center shadow-md ${
             userInfoBox ? "block" : "hidden"
           }`}>
-          <div className="flex flex-col items-center mb-5 bg-slate-200 px-1 py-3 rounded-md">
+          <div className="flex flex-col items-center min-w=[185px] mb-5 bg-slate-200 px-1 py-3 rounded-md">
             <img
               src={`${user?.photoURL || placeHolderImg}`}
               alt=""

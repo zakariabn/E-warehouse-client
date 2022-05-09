@@ -9,5 +9,12 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  font-weight: 500;
   margin-bottom: 0.4rem;
+}
+.footer div > a {
+  font-weight: 500;
+}
+.footer div > address {
+  font-weight: 500;
 }

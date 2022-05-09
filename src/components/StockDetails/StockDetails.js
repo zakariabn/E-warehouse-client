@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import DetailsCard from "./DetailsCard";
 export const StockQuantityContext = createContext("quantity");
 
@@ -19,17 +19,49 @@ const StockDetails = () => {
       .then((data) => {
         setStock(data);
         setStockQuantity(parseInt(data?.quantity));
-        setTotalSold(parseInt(data?.quantity));
+        setTotalSold(parseInt(data?.sold));
       })
       .catch((error) => console.dir(error));
   }, [id]);
 
+  // handling update stock
+  function updateSockHandel(e) {
+    e.preventDefault();
+    const currentStock = parseInt(stockQuantity);
+    const newAddedStock = parseInt(e.target.add_stock.value);
+
+    const intChecker = /^[0-9]+$/;
+    if (intChecker.test(newAddedStock)) {
+      const updatedStock = currentStock + newAddedStock;
+      setStockQuantity(updatedStock);
+      toast.success("Stock updated");
+      e.target.add_stock.value = "";
+    } else {
+      alert("wrong input");
+    }
+  }
+
+  // handling delivery and updating sold count
+  function handelDelivered() {
+    if (stockQuantity >= 1 ) {
+      setStockQuantity(stockQuantity - 1);    
+      toast.success("Successfully Delivered");
+      const newSoldCount = parseInt(totalSold) + 1;
+      setTotalSold(newSoldCount);
+    }
+    else {
+      toast.warn("Stock out")
+    }
+
+  }
+
   useEffect(() => {
     async function updateQuantity() {
       const quantity = stockQuantity;
+      const soldCount = totalSold;
 
       await axios
-        .post(`http://localhost:5000/stock/${id}`, { quantity })
+        .put(`http://localhost:5000/stock/${id}`, { quantity, soldCount })
         .then((res) => {
           if (res.data.acknowledged) {
             // setStock(res.data);
@@ -37,39 +69,14 @@ const StockDetails = () => {
         });
     }
     updateQuantity();
-  }, [stockQuantity, id]);
-
-  // handling update stock
-  function updateSockHandel(e) {
-    e.preventDefault();
-    const currentStock = parseInt(stockQuantity);
-    
-    const newAddedStock = parseInt(e.target.add_stock.value);
-    
-
-    const intChecker = /^[0-9]+$/;
-
-    if (intChecker.test(newAddedStock)) {
-      const updatedStock = currentStock + newAddedStock;
-      setStockQuantity(updatedStock);
-      toast.success("Stock updated");
-      e.target.add_stock.value = "";
-      
-    } else {
-      alert("wrong input");
-    }
-  }
-
-  function handelDelivered() {
-    setStockQuantity(stockQuantity - 1);
-    toast.success("Successfully Delivered");
-  }
+  }, [stockQuantity, totalSold, id]);
 
   return (
     <div className="flex flex-col items-center justify-center my-10">
       <DetailsCard
         stockDetails={stock}
         stockQuantity={stockQuantity}
+        totalSold={totalSold}
         handelUpdateStock={updateSockHandel}></DetailsCard>
 
       <button
