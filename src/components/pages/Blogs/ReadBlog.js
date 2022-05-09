@@ -15,14 +15,14 @@ const ReadBlog = () => {
     getBlog();
   }, [id]);
 
-  const {img, title, textBody} = blog;
+  const { img, title, blogText } = blog;
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <p>
-        {textBody}
-      </p>
+    <div className="flex flex-col items-center justify-center my-20 ">
+      <div className="max-w-screen-lg px-4">
+        <h1 className="font-bold text-3xl text-center mb-4">{title}</h1>
+        <p>{blogText}</p>
+      </div>
     </div>
   );
 };
