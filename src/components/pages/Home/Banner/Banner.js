@@ -9,7 +9,7 @@ const Banner = () => {
 
   return (
     <div className="hero-custom-bg hero-bg-gradient flex justify-center items-center text-white text-center">
-      <div>
+      <div className="px-4">
         <h1 className="text-4xl font-medium font-secondary-font mb-5">
           Product management system
         </h1>

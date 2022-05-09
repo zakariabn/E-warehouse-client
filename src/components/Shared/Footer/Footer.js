@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className={`footer flex justify-around py-12 px-1 text-white`}>
+    <div className={`footer flex flex-col gap-20 md:gap-5 md:flex-row md:justify-around  py-12 px-5 md:px-1 text-white`}>
       <div className="flex flex-col items-start">
         <h2 className="text-2xl font-bold mb-7">E-Warehouse</h2>
         <p className="max-w-[200px]">
