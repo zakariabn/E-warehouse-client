@@ -6,6 +6,7 @@ import useGetStockWithEmail from "../../../hooks/useGetStockWithEmail";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SingleStock from "../Inventory/SingleStock";
+import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 const MyStock = () => {
   const navigate = useNavigate();
@@ -57,15 +58,25 @@ const MyStock = () => {
             </th>
           </tr>
 
-          {stock?.map((stock) => {
-            return (
-              <SingleStock
-                key={stock._id}
-                stock={stock}
-                DemoId={counter++}
-                handelStockDelete={handelStockDelete}></SingleStock>
-            );
-          })}
+          {
+            stock.length > 0 
+            ? (
+              <>
+                {stock?.map((stock) => {
+                  return (
+                <SingleStock
+                  key={stock._id}
+                  stock={stock}
+                  DemoId={counter++}
+                  handelStockDelete={handelStockDelete}></SingleStock>
+                  );
+                })}
+              </> 
+            )
+            : (
+              <LoadingSpinner></LoadingSpinner>
+            )
+          }
         </table>
       </div>
 

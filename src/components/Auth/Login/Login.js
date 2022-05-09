@@ -3,7 +3,11 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
@@ -15,37 +19,34 @@ const Login = () => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
-    
   });
 
   const [userInfoError, setUserInfoError] = useState({
     emailError: "",
     passwordError: "",
-    generalError: ""
+    generalError: "",
   });
 
-  
   const [passVisible, setPassVisible] = useState(false);
   function passwordVisible(boolean) {
     if (boolean) {
       return (
         <>
           <FontAwesomeIcon
-          icon={faEye}
-          className="absolute top-2.5 right-3 text-purple-600"
-          onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
+            icon={faEye}
+            className="absolute top-2.5 right-3 text-purple-600"
+            onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
         </>
-      )
-    }
-    else {
+      );
+    } else {
       return (
         <>
           <FontAwesomeIcon
-          icon={faEyeSlash}
-          className="absolute top-2.5 right-3 text-purple-600"
-          onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
+            icon={faEyeSlash}
+            className="absolute top-2.5 right-3 text-purple-600"
+            onClick={() => setPassVisible(!passVisible)}></FontAwesomeIcon>
         </>
-      )
+      );
     }
   }
 
@@ -81,21 +82,16 @@ const Login = () => {
       });
     }
 
-    if(!passwordInputValue) {
+    if (!passwordInputValue) {
       setUserInfoError({ ...userInfoError, passwordError: "" });
     }
   }
 
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
-
-  // handling login  
-  function handelLogin (e) {
+  // handling login
+  function handelLogin(e) {
     e.preventDefault();
     const email = userInfo.email;
     const password = userInfo.password;
@@ -111,50 +107,56 @@ const Login = () => {
     }
   }
 
-  let from = location.state?.from?.pathname || "/";
-  if (user) {
-    navigate(from, {replace: true});
-  }
-
+  // handling email and password based login error
   useEffect(() => {
     if (error) {
       console.log(error);
       switch (error?.code) {
         case "auth/user-not-found":
-          toast.error('User not found please register');
+          toast.error("User not found please register");
           break;
         case "auth/wrong-password":
-          toast.error('Wrong Password try again.');
+          toast.error("Wrong Password try again.");
           break;
         case "auth/too-many-requests":
-          toast.error('Account is temporary banned for to many wrong attempt');
+          toast.error("Account is temporary banned for to many wrong attempt");
           break;
         default:
           break;
       }
     }
-  }, [error])
+  }, [error]);
+
+  // handling google sign in in
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+
+  function handelSignInWithGoogle() {
+    signInWithGoogle();
+  }
+
+  // redirecting user
+  let from = location.state?.from?.pathname || "/";
+  if (user || googleUser) {
+    navigate(from, { replace: true });
+  }
 
   // password reset functionality
-  const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
-    auth
-  );
+  const [sendPasswordResetEmail, sending, resetError] =
+    useSendPasswordResetEmail(auth);
 
-  function handelResetPassword () {
+  function handelResetPassword() {
     const email = userInfo.email;
 
     if (email) {
-      sendPasswordResetEmail(email)
-    }
-    else {
-      toast.error('Email not found. Please input email.')
+      sendPasswordResetEmail(email);
+    } else {
+      toast.error("Email not found. Please input email.");
     }
   }
   if (sending) {
-    toast.success('Password reset link send.', {id: 12231})
+    toast.success("Password reset link send.", { toastId: "resetPasswordMsg" });
   }
-
-
 
   return (
     <div className="flex justify-center my-20">
@@ -165,7 +167,6 @@ const Login = () => {
         <h2 className="text-xl font-main-font">Login</h2>
 
         <form className="mt-5 w-full px-10" onSubmit={handelLogin}>
-
           {/* email input */}
           <div className="flex flex-col mb-2">
             <input
@@ -214,7 +215,9 @@ const Login = () => {
               </label>
             </div>
 
-            <button className="text-purple-light font-medium" onClick={handelResetPassword}>
+            <button
+              className="text-purple-light font-medium"
+              onClick={handelResetPassword}>
               Forget password
             </button>
           </div>
@@ -228,11 +231,13 @@ const Login = () => {
         </div>
 
         {/* social login btn */}
-        <span className="bg-[#DB4437] px-3 py-2 rounded-full  hover:cursor-pointer mb-8">
+        <button
+          className="bg-[#DB4437] px-3 py-2 rounded-full  hover:cursor-pointer mb-8"
+          onClick={handelSignInWithGoogle}>
           <FontAwesomeIcon
             icon={faGoogle}
             className="text-white"></FontAwesomeIcon>
-        </span>
+        </button>
 
         {/* new user redirect to register page button */}
         <span className="flex gap-2 flex-col items-center px-2">

@@ -3844,6 +3844,11 @@ cssom@~0.3.6:
   resolved "https://registry.yarnpkg.com/cssom/-/cssom-0.3.8.tgz#9f1276f5b2b463f2114d3f2c75250af8c1a36f4a"
   integrity sha512-b0tGHbfegbhPJpxpiBPU2sCkigAqtM9O121le6bbOlgyV+NyGyCmVfJ6QW9eRjz8CpNfWEOYBIMIGRYkLwsIYg==
 
+cssonly-loaders-react@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/cssonly-loaders-react/-/cssonly-loaders-react-0.0.8.tgz#966a0bcb465d3f5f7754227f0ab13898db3b9733"
+  integrity sha512-lq6P5P8xAxLF7bgYYPlCgKoqOHGR6YTcdZHo+DPwcGEtV2DVa/h1FhKTyzArTXH6NgsdoFe00n7obkwT1FuPlQ==
+
 cssstyle@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/cssstyle/-/cssstyle-2.3.0.tgz#ff665a0ddbdc31864b09647f34163443d90b0852"

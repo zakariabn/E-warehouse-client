@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "^0.27.2",
+    "cssonly-loaders-react": "^0.0.8",
     "dotenv": "^16.0.0",
     "firebase": "^9.7.0",
     "react": "^18.1.0",

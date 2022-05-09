@@ -3,12 +3,19 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -104,9 +111,9 @@ const Register = () => {
   }
 
   const [createUserWithEmailAndPassword, user, loading, error] =
-  useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
-  function handelCreateNewUser (e) {
+  function handelCreateNewUserWithEmailAndPassword(e) {
     e.preventDefault();
     const email = userInfo.email;
     const password = userInfo.password;
@@ -114,6 +121,7 @@ const Register = () => {
     if (email || password) {
       createUserWithEmailAndPassword(email, password);
       setUserInfoError({ ...userInfoError, generalError: "" });
+      toast.info("Email verification link send.");
     } else {
       setUserInfoError({
         ...userInfoError,
@@ -125,10 +133,27 @@ const Register = () => {
   if (error) {
     console.log(error);
   }
-  if (user) {
-    console.log(user);
+
+  // handling google sign in in
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+
+  function handelCreateNewUserWithGoogle() {
+    signInWithGoogle();
   }
 
+  console.log(googleError);
+
+
+
+  // redirection user
+  let from = location.state?.from?.pathname || "/";
+  if (user || googleUser) {
+    toast.success("Successfully sign up complete", {
+      toastId: "signUpComplete",
+    });
+    navigate(from, { replace: true });
+  }
 
   return (
     <div className="flex justify-center my-20">
@@ -138,7 +163,9 @@ const Register = () => {
         </div>
         <h2 className="text-xl font-main-font">Sign up</h2>
 
-        <form className="mt-5 w-full px-10" onSubmit={handelCreateNewUser}>
+        <form
+          className="mt-5 w-full px-10"
+          onSubmit={handelCreateNewUserWithEmailAndPassword}>
           <div className="flex flex-col mb-2">
             <input
               type="text"
@@ -146,7 +173,7 @@ const Register = () => {
               placeholder="Name"
               className="border border-[#ababac50] px-2 rounded-md shadow-sm h-[35px] focus:outline-none"
             />
-            <small className="ml-3 text-orange">error</small>
+            <small className="ml-3 text-orange"></small>
           </div>
 
           {/* email input */}
@@ -202,7 +229,7 @@ const Register = () => {
           {/* submit btn */}
           <input
             type="submit"
-            value="Login"
+            value="Sign up"
             className="bg-purple-light w-full text-white font-medium py-2 mt-4 rounded-sm hover:cursor-pointer hover:bg-purple-dark duration-150"
           />
 
@@ -229,11 +256,13 @@ const Register = () => {
         </div>
 
         {/* social login btn */}
-        <span className="bg-[#DB4437] px-3 py-2 rounded-full  hover:cursor-pointer mb-8">
+        <button
+          className="bg-[#DB4437] px-3 py-2 rounded-full  hover:cursor-pointer mb-8"
+          onClick={handelCreateNewUserWithGoogle}>
           <FontAwesomeIcon
             icon={faGoogle}
             className="text-white"></FontAwesomeIcon>
-        </span>
+        </button>
 
         {/* new user redirect to register page button */}
         <span className="flex gap-2 flex-col items-center px-2">

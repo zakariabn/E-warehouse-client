@@ -7,6 +7,7 @@ import axios from "axios";
 import { data } from "autoprefixer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import LoadingSpinner from "../../Shared/LoadingSpinner/LoadingSpinner";
 
 const Inventory = () => {
   const [user] = useAuthState(auth);
@@ -72,15 +73,25 @@ const Inventory = () => {
             </th>
           </tr>
 
-          {stock?.map((stock) => {
-            return (
-              <SingleStock
-                key={stock._id}
-                stock={stock}
-                DemoId={counter++}
-                handelStockDelete={handelStockDelete}></SingleStock>
-            );
-          })}
+          {
+            stock.length > 0 
+            ? (
+              <>
+                {stock?.map((stock) => {
+                  return (
+                <SingleStock
+                  key={stock._id}
+                  stock={stock}
+                  DemoId={counter++}
+                  handelStockDelete={handelStockDelete}></SingleStock>
+                  );
+                })}
+              </> 
+            )
+            : (
+              <LoadingSpinner></LoadingSpinner>
+            )
+          }
         </table>
       </div>
 
@@ -93,4 +104,4 @@ const Inventory = () => {
   );
 };
 
-export default Inventory;
+export default Inventory
