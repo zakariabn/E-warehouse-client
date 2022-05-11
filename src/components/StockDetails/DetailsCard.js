@@ -16,16 +16,16 @@ const DetailsCard = ({stockDetails, handelUpdateStock, stockQuantity, totalSold}
   return (
     <>
       <div className="bg-slate-200 lg:w-[700px]">
-        <h4 className="bg-primary">
-          Product ID: <span>{_id}</span>
+        <h4 className="bg-primary px-5 py-2 text-white font-semibold">
+          Product ID : <span className="border-b text-black rounded-md px-2">{_id}</span>
         </h4>
         <div className="flex flex-col lg:flex-row lg:gap-10">
           <div className=" flex flex-col items-center p-3 w-[350px]">
-            <h3 className="max-w-[300px]">{name}</h3>
+            <h3 className="max-w-[300px] font-bold mb-1">{name}</h3>
             <img src={img} alt="" className="h-[300px]" />
           </div>
 
-          <div className="w-[350px] flex flex-col items-center lg:block mt-20">
+          <div className="w-[350px] flex flex-col items-center lg:block mt-20 font-medium text-lg">
             <div className="mb-10">
               <p>Price: {price}</p>
               <p>Supplier: {supplier_name}</p>

@@ -1,0 +1,7 @@
+.shadow-shade {
+  background-image: radial-gradient(
+    closest-side,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+}

@@ -13,7 +13,7 @@ const StockDetails = () => {
 
   // fetching data for this id
   useEffect(() => {
-    const url = `https://localhost:5000/stock/${id}`;
+    const url = `http://localhost:5000/stock/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -61,7 +61,7 @@ const StockDetails = () => {
       const soldCount = totalSold;
 
       await axios
-        .put(`https://localhost:5000/stock/${id}`, { quantity, soldCount })
+        .put(`http://localhost:5000/stock/${id}`, { quantity, soldCount })
         .then((res) => {
           if (res.data.acknowledged) {
             // setStock(res.data);
