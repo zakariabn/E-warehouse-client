@@ -49,7 +49,7 @@ const AddStock = () => {
     async function newStock() {
       try {
         await axios
-          .post("https://e-warehouse.herokuapp.com/stock", { stockInfo })
+          .post(`http://localhost:5000/stock`, { stockInfo })
           .then((response) => {
             console.log(response);
             toast.success('New stock added successfully');

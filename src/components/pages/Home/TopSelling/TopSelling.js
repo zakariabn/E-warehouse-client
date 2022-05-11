@@ -9,7 +9,7 @@ const TopSelling = () => {
     async function getBestSellerStock() {
       try {
         await axios
-          .get(`https://e-warehouse.herokuapp.com/stock/best-seller?limit=${3}`)
+          .get(`http://localhost:5000/stock/best-seller?limit=${3}`)
           .then((res) => setBestSellingStock(res?.data));
       } catch (error) {
         console.log(error);

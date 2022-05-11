@@ -13,7 +13,7 @@ const Blogs = () => {
   useEffect(() => {
     async function getBlogs() {
       await axios
-        .get(`https://e-warehouse.herokuapp.com/blog`)
+        .get(`http://localhost:5000/blog`)
         .then((res) => setBlogs(res.data));
     }
     getBlogs();

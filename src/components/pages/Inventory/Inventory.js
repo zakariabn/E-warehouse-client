@@ -20,7 +20,7 @@ const Inventory = () => {
     const isReady = window.confirm(" Are you sure you want to delete");
 
     if (isReady) {
-      const url = `https://e-warehouse.herokuapp.com/stock/${id}`;
+      const url = `http://localhost:5000/stock/${id}`;
       axios.delete(url).then((response) => {
         if (response.data.deletedCount === 1) {
           const remaining = stock.filter((stock) => stock._id !== id);
@@ -29,6 +29,7 @@ const Inventory = () => {
       });
     }
   }
+  
   console.log(user);
 
   function handelSendToAddStockPage() {

@@ -9,7 +9,7 @@ const ReadBlog = () => {
   useEffect(() => {
     async function getBlog() {
       await axios
-        .get(`https://e-warehouse.herokuapp.com/blog/${id}`)
+        .get(`http://localhost:5000/blog/${id}`)
         .then((res) => setBlog(res.data));
     }
     getBlog();
